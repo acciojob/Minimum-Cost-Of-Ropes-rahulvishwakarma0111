@@ -1,37 +1,19 @@
 //your code here
-const val = document.querySelector('#rope-lengths');
-const result = document.getElementById("result")
- 
-function calculateMinCost() {
-	const arr = (val.value).split(", ").map((e) => parseInt(e));
-	const n = arr.length
-	 let pq = [];
-   
-        // Adding items to the pQueue
-        for (let i = 0; i < n; i++) {
-            pq.push(arr[i]);
-        }   
-           
-        pq.sort(function(a,b){return a-b;});
-         
-        // Initialize result
-        let res = 0;
-   
-        // While size of priority queue
-        // is more than 1
-        while (pq.length > 1) {
-            // Extract shortest two ropes from pq
-            let first = pq.shift();
-            let second = pq.shift();
-   
-            // Connect the ropes: update result
-            // and insert the new rope to pq
-            res += first + second;
-            pq.push(first + second);
-            pq.sort(function(a,b){return a-b;});
-        }
-  
-        return res;
-        result.innerText = res;
+//your code here
+function fun(even) {
+	even.preventDefault();
+var inp=document.querySelector('input').value;
+var arr=inp.split(",");
+	arr.sort(function(a,b){return a-b});
+
+	
+	let cost=0;
+	while (arr.length>1) {
+	let curr=Number(arr[0])+Number(arr[1]);
+	arr.splice(0,2);
+	arr.push(curr);
+		cost+=curr;
+		arr.sort(function(a,b){return a-b});
+	}
+	var ans=document.getElementById('result').textContent=cost;
 }
- 
