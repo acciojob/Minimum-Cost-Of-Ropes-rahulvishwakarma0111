@@ -1,16 +1,22 @@
-function wow(event) {
-	event.preventDefault();
-	var a = document.querySelector("input").value
-    var r = a.split(",");
+function calculateMinCost() {
+  const ropeLengthsStr = document.getElementById('rope-lengths').value;
+  const ropeLengthsArr = ropeLengthsStr.split(',').map(Number);
+  const n = ropeLengthsArr.length;
 
-var sum =0;
-    while(r.length>1){
-    r.sort( function (a , b ){ return a-b} );
-    var inssum =    Number(r[0])+Number(r[1]);
-    sum = sum + inssum
-    console.log(r);
-    r.splice(0 , 2 , inssum)
-    }
+  let pq = [];
+  for (let i = 0; i < n; i++) {
+    pq.push(ropeLengthsArr[i]);
+  }
+  pq.sort(function (a, b) { return a - b; });
 
-	document.querySelector("#result").innerText = sum;
+  let res = 0;
+  while (pq.length > 1) {
+    let first = pq.shift();
+    let second = pq.shift();
+    res += first + second;
+    pq.push(first + second);
+    pq.sort(function (a, b) { return a - b; });
+  }
+
+  document.getElementById('result').textContent = res;
 }
